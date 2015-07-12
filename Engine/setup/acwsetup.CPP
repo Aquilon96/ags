@@ -1,7 +1,8 @@
 //=============================================================================
 //
 // Adventure Game Studio (AGS)
-//
+// The leading engine for making point n clicks
+// http://http://www.adventuregamestudio.co.uk
 // Copyright (C) 1999-2011 Chris Jones and 2011-20xx others
 // The full list of copyright holders can be found in the Copyright.txt
 // file, which is part of this source code distribution.
@@ -12,9 +13,9 @@
 //
 //=============================================================================
 
-#include <windows.h>
+#include <windows.h>  // Include functions are used for importing header files.
 #include <stdio.h>
-#include <io.h>
+#include <io.h> 
 #include <stdlib.h>
 #include "resource/resource.h"
 #include "ac/gamestructdefines.h"
@@ -24,7 +25,7 @@
 using AGS::Common::Stream;
 using namespace AGS; // FIXME later
 
-#define AL_ID(a,b,c,d)     (((a)<<24) | ((b)<<16) | ((c)<<8) | (d))
+#define AL_ID(a,b,c,d)     (((a)<<24) | ((b)<<16) | ((c)<<8) | (d)) // #define <name> <definition>
 
 #define DIGI_DIRECTAMX(n)        AL_ID('A','X','A'+(n),' ')
 // This DirectX hardware mixer is crap, it crashes the program
@@ -41,12 +42,12 @@ extern int  INIreadint(const char*, const char*, int=0);
 extern void fgetstring_limit (char *, Stream *, int);
 extern char* ac_config_file;
 const char*setupstring, *enginever;
-int curscrn=-1,csendto,curdigi=0,curmidi=0,windowed=0,useletterbox = 0;
+int curscrn=-1,csendto,curdigi=0,curmidi=0,windowed=0,useletterbox = 0; // int = integer
 GameResolutionType defaultRes = kGameResolution_Undefined;
-int gameColDep = 0;
-int refresh = 0, antialias = 0, reduce32to16 = 0;
+int gameColDep = 0; // An integer is a whole number that can be positive, negative, or zero.
+int refresh = 0, antialias = 0, reduce32to16 = 0; 
 int sideBorders = 1;
-char curtranslation[200] = "";
+char curtranslation[200] = ""; 
 char curdatadir[MAX_PATH] = ".";
 char curFilter[100] = "";
 char curGfxDriver[100] = "";
@@ -61,7 +62,7 @@ const char *specialFilterID = "max";
 
 int get_filter_real_index(int list_index)
 {
-    if (list_index == specialFilterListIndex)
+    if (list_index == specialFilterListIndex) // if statement
     {
         return -1;
     }
@@ -85,9 +86,9 @@ const char *get_filter_id(int list_index)
     return real_index >= 0 ? filterList[real_index]->GetFilterID() : specialFilterID;
 }
 
-void update_resolution_texts(HWND hDlg) {
+void update_resolution_texts(HWND hDlg) { //  the void keyword specifies that the function does not return a value.
   
-  bool letterbox_by_design = INIreadint("misc", "letterbox", 0) > 0;
+  bool letterbox_by_design = INIreadint("misc", "letterbox", 0) > 0;  // bool is a language integral type whose supported values are just true and false
   Size res_size = ResolutionTypeToSize(defaultRes, letterbox_by_design);
   int resx = res_size.Width;
   int resy = res_size.Height;
@@ -122,7 +123,7 @@ void retrieve_filter_list(bool isD3D)
   {
     filterList = get_d3d_gfx_filter_list(true);
   }
-  else
+  else // else statement
   {
     filterList = get_allegro_gfx_filter_list(true);
   }
@@ -245,7 +246,7 @@ void InitializeDialog(HWND hDlg) {
           SendDlgItemMessage (hDlg, IDC_COMBO3, CB_SETCURSEL, idx, 0);
         idx++;
       }
-    } while( _findnext( hFile, &c_file ) == 0 );
+    } while( _findnext( hFile, &c_file ) == 0 ); // loop
 
     _findclose( hFile );
   }
